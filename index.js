@@ -27,10 +27,13 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
+ *      counter1 is creating a new copy of the function counterMaker, counter2 is is doing the same thing except using an outside variable rather than an internal variable for count.
  * 
  * 2. Which of the two uses a closure? How can you tell?
+ *      counter2, because it is reaching outside the function's scope
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ *      counter2 would be better if count needed to be called upon by another function, because count is external to the function's scope. counter1 would be best if we didn't need access to the variables and we wanted to use the function multiple times in multiple ways.
  *
 */
 
@@ -56,11 +59,13 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
+function inning() {
 
-    /*Code Here*/
+  return Math.round(Math.random() * 2)
 
 }
+
+console.log(inning())
 
 /* Task 3: finalScore()
 
@@ -74,13 +79,28 @@ finalScore(inning, 9) might return:
   "Away": 5,
 }
 
-*/ 
+*/
 
-function finalScore(/*code Here*/){
+function finalScore(inning, number) {
 
-  /*Code Here*/
+  let obj = {
+    "Home": 0,
+    "Away": 0,
+  }
+
+
+  for (let i = 0; i < number; i++) {
+    obj.Home = obj.Home + inning();
+    obj.Away = obj.Away + inning();
+  }
+
+  return obj;
 
 }
+
+console.log(finalScore(inning, 9));
+
+
 
 /* Task 4: 
 
@@ -104,8 +124,18 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function getInningScore(inning) {
+  return inning()
+}
+
+function scoreboard(getInningScore, inning, number) {
+
+  let obj = {};
+
+  for (let i = 0; i < number; i++) {
+
+  }
+
 }
 
 

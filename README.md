@@ -42,6 +42,9 @@ Find the file `index.js` and complete the tasks until your tests are passing.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+    Closure is when a function has access to variables that are outside of it's own scope.
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -63,8 +66,21 @@ dansRoll();
 ```
 
 a. Where is closure used in this code? How can you tell?
+
+    The closure is when the argument gets passed through, because the argument is external to the function.
+
+    OR
+
+    Math is calling an external function, because it returns something different every time.
+
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
+
+    The name is always the same, as is the "rolled a". The newRoll will change every time.
+
 c. What is the lexical scope of `newRoll`? 
+    
+    It can only be used within the return function of personalDice. It has access to the outer function's variables.
+
 
 ### Task 3 - Stretch Goals
 
