@@ -30,7 +30,7 @@ function processFirstItem(stringList, callback) {
  *      counter1 is creating a new copy of the function counterMaker, counter2 is is doing the same thing except using an outside variable rather than an internal variable for count.
  * 
  * 2. Which of the two uses a closure? How can you tell?
- *      counter2, because it is reaching outside the function's scope
+ *      counter1, because counter can access count, but no other functions can access it.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
  *      counter2 would be better if count needed to be called upon by another function, because count is external to the function's scope. counter1 would be best if we didn't need access to the variables and we wanted to use the function multiple times in multiple ways.
@@ -96,11 +96,20 @@ function finalScore(inning, number) {
 
   return obj;
 
+
+  // let homeScore = 0; 
+  // let awayScore = 0;
+  // for(let i = 0; i< number; i++){
+  //   homeScore = homeScore + inning();
+  //   awayScore = awayScore + inning();
+  // }
+  // return{
+  //   Home: homeScore,
+  //   Away: awayScore 
+  // }
 }
 
 console.log(finalScore(inning, 9));
-
-
 
 /* Task 4: 
 
@@ -126,33 +135,56 @@ Final Score: awayTeam - homeTeam */
 
 function getInningScore(inning) {
   return obj = {
-    "Home": inning(),
-    "Away": inning(),
+    Home: inning(),
+    Away: inning(),
   }
 }
 
-function scoreboard(getInningScore, inning, number) {
+// function scoreboard(getInningScore, inning, number) {
 
-  let awayTeamScore = 0;
-  let homeTeamScore = 0;
+//   // let awayTeamScore = 0;
+//   // let homeTeamScore = 0;
 
-  let arr = []
+//   // let arr = []
+
+//   // for (let i = 0; i < number; i++) {
+//   //   awayTeamScore += inning();
+//   //   homeTeamScore += inning();
+
+//   //   arr.push(`${i + 1} inning: ${awayTeamScore} - ${homeTeamScore}`)
+//   // }
+
+//   // return obj = {
+//   //   innings: arr,
+//   //   final: `Final Score: ${awayTeamScore} - ${homeTeamScore}`,
+//   // };
 
 
 
-  for (let i = 0; i < number; i++) {
-    awayTeamScore += inning();
-    homeTeamScore += inning();
 
-    arr.push(`${i + 1} inning: ${awayTeamScore} - ${homeTeamScore}`)
+// }
 
+function scoreboard(inningScoreCB, inningCB, inningsNum) {
+  const scoreByInning = [];
 
+  let homeScore = 0;
+  let awayScore = 0;
+
+  for (let i = 0; i < inningsNum; i++) {
+    const currentInning = inningScoreCB(inningCB);
+    homeScore = homeScore + currentInning.Home;
+    awayScore = awayScore + currentInning.Away;
+
+    scoreByInning.push(`Inning ${i + 1}: Away: ${currentInning.Away} - Home: ${currentInning.Home}`)
   }
 
-  return obj = {
-    innings: arr,
-    final: `Final Score: ${awayTeamScore} - ${homeTeamScore}`,
-  };
+  if (homeScore === awayScore) {
+    scoreByInning.push(`you will need to play another inning`);
+  } else {
+    scoreByInning.push(`Final Score: Away: ${awayScore} - Home: ${homeScore}`)
+  }
+
+  return scoreByInning;
 }
 
 console.log(scoreboard(getInningScore, inning, 9))
